@@ -26,16 +26,31 @@ export type Author = {
 
 export type Game = {
   __typename?: 'Game';
-  description?: Maybe<Scalars['String']['output']>;
-  genre: Scalars['String']['output'];
   id: Scalars['ID']['output'];
-  image?: Maybe<Scalars['String']['output']>;
   platforms: Array<Scalars['String']['output']>;
-  price: Scalars['Float']['output'];
-  rating?: Maybe<Scalars['Float']['output']>;
-  releaseDate: Scalars['String']['output'];
   reviews?: Maybe<Array<Review>>;
   title: Scalars['String']['output'];
+};
+
+export type GameInput = {
+  platforms: Array<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addGame?: Maybe<Array<Maybe<Game>>>;
+  deleteGame?: Maybe<Array<Maybe<Game>>>;
+};
+
+
+export type MutationAddGameArgs = {
+  game: GameInput;
+};
+
+
+export type MutationDeleteGameArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Query = {
@@ -152,7 +167,9 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   Game: ResolverTypeWrapper<Game>;
+  GameInput: GameInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+  Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Review: ResolverTypeWrapper<Review>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -164,7 +181,9 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Float: Scalars['Float']['output'];
   Game: Game;
+  GameInput: GameInput;
   ID: Scalars['ID']['output'];
+  Mutation: Record<PropertyKey, never>;
   Query: Record<PropertyKey, never>;
   Review: Review;
   String: Scalars['String']['output'];
@@ -178,16 +197,15 @@ export type AuthorResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type GameResolvers<ContextType = any, ParentType extends ResolversParentTypes['Game'] = ResolversParentTypes['Game']> = {
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  genre?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   platforms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  rating?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  releaseDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addGame?: Resolver<Maybe<Array<Maybe<ResolversTypes['Game']>>>, ParentType, ContextType, RequireFields<MutationAddGameArgs, 'game'>>;
+  deleteGame?: Resolver<Maybe<Array<Maybe<ResolversTypes['Game']>>>, ParentType, ContextType, RequireFields<MutationDeleteGameArgs, 'id'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -213,6 +231,7 @@ export type ReviewResolvers<ContextType = any, ParentType extends ResolversParen
 export type Resolvers<ContextType = any> = {
   Author?: AuthorResolvers<ContextType>;
   Game?: GameResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Review?: ReviewResolvers<ContextType>;
 };

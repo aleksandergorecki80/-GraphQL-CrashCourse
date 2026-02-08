@@ -29,4 +29,16 @@ export const resolvers = {
     author: (parent: Review) =>
       db.authors.find((author: Author) => author.id === parent.authorId),
   },
+  Mutation: {
+    deleteGame: (_, args, context) =>
+      (db.games = db.games.filter((game: Game) => game.id !== args.id)),
+    addGame: (_, args, context) => {
+      const newGame = {
+        id: crypto.randomUUID().toString(),
+        ...args.game,
+      };
+      db.games.push(newGame);
+      return db.games;
+    },
+  },
 };
