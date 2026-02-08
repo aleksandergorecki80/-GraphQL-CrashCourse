@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "lib": ["es2023"],
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["node"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+  },
+  "include": ["src/**/*"]
+}
