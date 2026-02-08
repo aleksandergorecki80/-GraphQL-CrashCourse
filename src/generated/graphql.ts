@@ -20,6 +20,7 @@ export type Author = {
   __typename?: 'Author';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  reviews?: Maybe<Array<Review>>;
   verified: Scalars['Boolean']['output'];
 };
 
@@ -33,6 +34,7 @@ export type Game = {
   price: Scalars['Float']['output'];
   rating?: Maybe<Scalars['Float']['output']>;
   releaseDate: Scalars['String']['output'];
+  reviews?: Maybe<Array<Review>>;
   title: Scalars['String']['output'];
 };
 
@@ -63,8 +65,12 @@ export type QueryReviewArgs = {
 
 export type Review = {
   __typename?: 'Review';
+  author: Author;
+  authorId: Scalars['ID']['output'];
   comment?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['String']['output'];
+  game: Game;
+  gameId: Scalars['ID']['output'];
   id: Scalars['ID']['output'];
   rating: Scalars['Float']['output'];
 };
@@ -167,6 +173,7 @@ export type ResolversParentTypes = {
 export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   verified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 };
 
@@ -179,6 +186,7 @@ export type GameResolvers<ContextType = any, ParentType extends ResolversParentT
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   rating?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   releaseDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  reviews?: Resolver<Maybe<Array<ResolversTypes['Review']>>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 };
 
@@ -192,8 +200,12 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type ReviewResolvers<ContextType = any, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = {
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  authorId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   comment?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  game?: Resolver<ResolversTypes['Game'], ParentType, ContextType>;
+  gameId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   rating?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
 };

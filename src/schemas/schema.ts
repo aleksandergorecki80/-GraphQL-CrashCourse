@@ -9,6 +9,7 @@ export const typeDefs = `#graphql
     platforms: [String!]!
     rating: Float
     image: String
+    reviews: [Review!]
   }
 
   type Review {
@@ -16,12 +17,17 @@ export const typeDefs = `#graphql
     rating: Float!
     comment: String
     createdAt: String!
+    game: Game!
+    gameId: ID!
+    author: Author!
+    authorId: ID!
   }
 
   type Author {
     id: ID!
     name: String!
     verified: Boolean!
+    reviews: [Review!]
   }
 
   type Query {

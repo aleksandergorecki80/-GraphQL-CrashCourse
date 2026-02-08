@@ -47,6 +47,14 @@
       "createdAt": "2021-01-01",
       "gameId": "1",
       "authorId": "3"
+    },
+    {
+      "id": "4",
+      "rating": 5.0,
+      "comment": "Mario Kart 8 is a great game.",
+      "createdAt": "2021-01-01",
+      "gameId": "2",
+      "authorId": "4"
     }
   ],
   "authors": [
